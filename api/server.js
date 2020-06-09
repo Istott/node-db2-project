@@ -1,6 +1,6 @@
 const express = require("express");
 
-const AccountsRouter = require("../dealers/car-dealersRouter");
+const DealersRouter = require("../dealers/car-dealersRouter");
 
 // const db = require("../data/dbConfig.js");
 
@@ -8,7 +8,7 @@ const server = express();
 
 server.use(express.json());
 
-server.use("/api/accounts", AccountsRouter);
+server.use("/api/dealers", DealersRouter);
 
 server.get("/", (req, res) => {
   res.status(200).json({ api: "up up and away" });
