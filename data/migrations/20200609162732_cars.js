@@ -5,9 +5,11 @@ exports.up = function(knex) {
         tbl.increments();
     
         tbl.string("VIN", 255).notNullable().unique();
-        tbl.string("make", 255);
-        tbl.string("model", 255);
-        tbl.string("mileage", 255);
+        tbl.string("make", 255).notNullable();
+        tbl.string("model", 255).notNullable();
+        tbl.integer("mileage", 255).notNullable();
+        tbl.boolean("Auto_transmission");
+        tbl.string("title_status", 100);
       });
 };
 

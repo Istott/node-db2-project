@@ -8,9 +8,9 @@ const router = express.Router();
 router.get("/", (req, res) => {
     knex
       .select("*")
-      .from("accounts")
-      .then(accounts => {
-        res.status(200).json({ data: accounts });
+      .from("cars")
+      .then(cars => {
+        res.status(200).json({ data: cars });
       })
       .catch(error => {
         console.log("GET / error", error);
@@ -19,77 +19,77 @@ router.get("/", (req, res) => {
       });
 });
 
-// router.get("/:id", (req, res) => {
-//     knex
-//       .select("*")
-//       .where({ id: req.params.id })
-//       .from("accounts")
-//       .first()
+router.get("/:id", (req, res) => {
+    knex
+      .select("*")
+      .where({ id: req.params.id })
+      .from("cars")
+      .first()
 
-//       .then(account => {
-//         res.status(200).json({ data: account });
-//       })
-//       .catch(error => {
-//         console.log("GET / error", error);
+      .then(car => {
+        res.status(200).json({ data: car });
+      })
+      .catch(error => {
+        console.log("GET / error", error);
   
-//         res.status(500).json({ message: error.message });
-//       });
-// });
+        res.status(500).json({ message: error.message });
+      });
+});
 
-// router.post("/", (req, res) => {
-//     knex("accounts")
-//         .insert(req.body, "id")
+router.post("/", (req, res) => {
+    knex("cars")
+        .insert(req.body, "id")
 
-//         .then(([id]) => {
-//             res.status(201).json({ data: id });
-//         })
-//         .catch(error => {
-//             console.log("POST / error", error);
+        .then(([id]) => {
+            res.status(201).json({ data: id });
+        })
+        .catch(error => {
+            console.log("POST / error", error);
 
-//             res.status(500).json({ message: error.message });
-//         });
-// });
+            res.status(500).json({ message: error.message });
+        });
+});
 
-// router.put("/:id", (req, res) => {
-//     const { id } = req.params;
-//     const changes = req.body;
+router.put("/:id", (req, res) => {
+    const { id } = req.params;
+    const changes = req.body;
 
-//     knex("accounts")
-//         .where({ id }) // if not using a where, all records will be updated.... boo ya baby!!
-//         .update(changes)
+    knex("cars")
+        .where({ id }) // if not using a where, all records will be updated.... boo ya baby!!
+        .update(changes)
 
-//         .then(count => {
-//             if (count > 0) {
-//                 res.status(200).json({ message: "account updated successfully" });
-//             } else {
-//                 res.status(404).json({ message: "no accounts found" });
-//             }
-//         })
-//         .catch(error => {
-//             console.log("PUT / error", error);
-//             res.status(500).json({ message: error.message });
-//         });
-// });
+        .then(count => {
+            if (count > 0) {
+                res.status(200).json({ message: "Custom job successful" });
+            } else {
+                res.status(404).json({ message: "your broke dude" });
+            }
+        })
+        .catch(error => {
+            console.log("PUT / error", error);
+            res.status(500).json({ message: error.message });
+        });
+});
 
-// router.delete("/:id", (req, res) => {
-//     const { id } = req.params;
+router.delete("/:id", (req, res) => {
+    const { id } = req.params;
 
-//     knex("accounts")
-//         .where({ id }) //must use where on Deletes
-//         .del()
+    knex("cars")
+        .where({ id }) //must use where on Deletes
+        .del()
 
-//         .then(count => {
-//             if (count > 0) {
-//                 res.status(200).json({ message: "account deleted successfully" });
-//             } else {
-//                 res.status(404).json({ message: "no accounts found" });
-//             }
-//         })
-//         .catch(error => {
-//             console.log("DELETE / error", error);
+        .then(count => {
+            if (count > 0) {
+                res.status(200).json({ message: "Car went boom boom" });
+            } else {
+                res.status(404).json({ message: "someone stole your car" });
+            }
+        })
+        .catch(error => {
+            console.log("DELETE / error", error);
 
-//             res.status(500).json({ message: error.message });
-//         });
-// });
+            res.status(500).json({ message: error.message });
+        });
+});
 
 module.exports = router;
